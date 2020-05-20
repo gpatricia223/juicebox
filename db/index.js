@@ -109,7 +109,7 @@ async function createPost({ authorId, title, content, tags = []}) {
   }
 }
 
-async function updatePost(id, fields = {}) {
+async function updatePost(postId, fields = {}) {
   //read tags & remove that field
   const { tags } = fields; 
   delete fields.tags;
@@ -145,7 +145,7 @@ const tagListString = tagList.map(
 await client.query(`
   DELETE FROM post_tags
   WHERE "tagId"
-  NOT IN (${ tagListIdString })
+  NOT IN (${ tagListString })
   AND "postId"=$1;
   `, [postId]);
  
@@ -166,7 +166,7 @@ async function getAllPosts()   {
     FROM posts;
     `);
 
-  const post = await Promise.all(postIds.map(
+  const posts = await Promise.all(postIds.map(
     post => getPostById( post.id )
   ));
 
