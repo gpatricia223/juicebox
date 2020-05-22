@@ -4,6 +4,7 @@ const {
   updateUser,
   getAllUsers,
   getUserById,
+  getUserByUsername,
   createPost,
   updatePost,
   getAllPosts,
@@ -162,6 +163,8 @@ async function dropTables() {
       });
 
       console.log("Result:", updateUserResult);
+
+      //get userby username log
 
       console.log("calling getAllPosts")
       const posts = await getAllPosts();
