@@ -108,7 +108,12 @@ async function getUserByUsername(username) {
  * POST Methods
  */
 
-async function createPost({ authorId, title, content, tags = []}) {
+async function createPost({ 
+  authorId, 
+  title, 
+  content, 
+  tags = []
+}) {
   try {
     const { rows: [post]  } = await client.query(`
     INSERT INTO posts("authorId", title, content)
@@ -349,6 +354,7 @@ module.exports = {
   updatePost,
   getAllPosts,
   getPostsByUser,
+  getPostById,
   getPostsByTagName,
   createTags,
   getAllTags,
