@@ -164,7 +164,7 @@ async function dropTables() {
 
       console.log("Result:", updateUserResult);
 
-      //get userby username log
+      //get userbyusername log
 
       console.log("calling getAllPosts")
       const posts = await getAllPosts();
