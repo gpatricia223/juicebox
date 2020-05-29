@@ -11,11 +11,11 @@ tagsRouter.use((req, res, next) => {
 
 tagsRouter.get('/', async (req, res) => {
   try {  
-    const Alltags = await getAllTags();
+    const tags = await getAllTags();
 
-    const tags =Alltags.filter(tag => {
-      return tag.active || (req.user && post.author.id === req.user.id);
-    });
+    // const tags =Alltags.filter(tag => {
+    //   return tag.active || (req.user && post.author.id === req.user.id);
+    // });
 
     res.send({
     tags
