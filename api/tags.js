@@ -10,11 +10,19 @@ tagsRouter.use((req, res, next) => {
 });
 
 tagsRouter.get('/', async (req, res) => {
-    const tags = await getAllTags();
+  try {  
+    const Alltags = await getAllTags();
+
+    const tags =Alltags.filter(tag => {
+      return tag.active || (req.user && post.author.id === req.user.id);
+    });
 
     res.send({
     tags
   });
+} catch ({ name, message }) {
+  next({ name, message });
+}
 });
 
 tagsRouter.get('/:tagName/posts', async (req, res, next) => {

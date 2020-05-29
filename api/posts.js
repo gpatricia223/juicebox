@@ -13,11 +13,19 @@ postsRouter.use((req, res, next) => {
 });
 
 postsRouter.get('/', async (req, res) => {
-    const posts = await getAllPosts();
+  try {
+    const allPosts = await getAllPosts();
+
+    const posts = allPosts.filter(post => {
+      return post.active || (req.user && post.author.id === req.user.id);
+    });
 
     res.send({
-    posts
-  });
+      posts
+    });
+  } catch ({ name, message }) {
+    next({ name, message });
+  }
 });
 
 postsRouter.post('/', requireUser, async (req, res, next) => {
